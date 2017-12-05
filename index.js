@@ -58,6 +58,11 @@ if (program.file && !fs.existsSync(program.file)) {
   process.exit(1);
 }
 
+/* Handlebars config */
+handlebars.registerHelper('header', function(str, char) {
+  return str.replace(/./g, char);
+});
+
 var templatePath = program.template || path.join(__dirname, 'changelog.hbs');
 var template = fs.readFileSync(templatePath, 'utf8');
 var changelog = handlebars.compile(template, {noEscape: true});
