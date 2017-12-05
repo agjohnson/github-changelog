@@ -18,6 +18,8 @@ program
         'for private repos).')
     .option('-p, --password <pass>', 'Your GitHub password (only required ' +
         'for private repos).')
+    .option('-t, --token <token>', 'A GitHub personal token (only required ' +
+        'for private repos).')
     .option('-f, --file <filename>', 'Output file.  If the file exists, ' +
         'log will be prepended to it.  Default is to write to stdout.')
     .option('-s, --since <iso-date>', 'Last changelog date.  If the "file" ' +
@@ -64,7 +66,13 @@ var owner = program.owner || program.username;
 
 var github = new Client({version: '3.0.0'});
 
-if (program.username && program.password) {
+if (program.token) {
+  github.authenticate({
+    type: 'oauth',
+    token: program.token,
+  });
+}
+else if (program.username && program.password) {
   github.authenticate({
     type: 'basic',
     username: program.username,
