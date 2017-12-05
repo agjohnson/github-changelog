@@ -59,7 +59,7 @@ if (program.file && !fs.existsSync(program.file)) {
 }
 
 /* Handlebars config */
-handlebars.registerHelper('header', function(str, char) {
+handlebars.registerHelper('toHeader', function(str, char) {
   return str.replace(/./g, char);
 });
 
