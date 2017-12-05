@@ -8,6 +8,9 @@ var path = require('path');
 var Client = require('github');
 var async = require('async');
 var handlebars = require('handlebars');
+var helpers = require('handlebars-helpers')({
+  handlebars: handlebars
+});
 var program = require('commander');
 
 program
